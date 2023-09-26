@@ -1,0 +1,21 @@
+version: '2.20.2'
+
+services:
+  nginx-server:
+    container_name: nginx-server
+    image: nginx-server:latest
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "80:80"
+    networks:
+      - nginx_default
+
+networks:
+  nginx_default:
+    name: nginx_default
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.240.0/26
